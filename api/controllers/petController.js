@@ -8,8 +8,8 @@
     'use strict';
 
     var mongoose = require('mongoose').set('debug',true);
-    var Pets = require('../models/Pets');
-    var Users = require('../models/Users');
+    var Pets = require('../models/mongo/Pets');
+    var Users = require('../models/mongo/Users');
     var ObjectId = require('mongodb').ObjectID;
     
     
