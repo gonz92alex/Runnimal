@@ -1,11 +1,14 @@
 'use strict';
 
 var multer  = require('multer')
-var upload = multer({ dest: 'uploads/' })
+var upload = multer({ dest: 'photo/' })
 
 var Users = require('../models/userModel');
 var Pets = require('../models/petModel');
 var Photos = require('../models/photoModel');
+
+
+
 
 exports.uploadUser = function(req,res) {
     var email = req.params.email;
@@ -13,7 +16,7 @@ exports.uploadUser = function(req,res) {
     email = email.trim();
     console.log(req.body);
     console.log(req.file);
-    /*let user = Users.exists(email).then(function(user){
+    let user = Users.exists(email).then(function(user){
         return Users.promiseToUser(user);
     })
     .catch(err=>{
@@ -28,7 +31,7 @@ exports.uploadUser = function(req,res) {
     }
     else{
         res.status(432).send("User doesn't exist");
-    }*/
+    }
 };
 
     

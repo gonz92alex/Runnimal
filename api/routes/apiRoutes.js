@@ -7,7 +7,7 @@ module.exports = function(app) {
   var training = require('../controllers/trainingController');
 
   var multer  = require('multer');
-  var upload = multer({ dest: 'uploads/' });
+  var upload = multer({ dest: 'photos/' });
   //app.set('view engine', 'jade');
 
   app.get('/api/users',users.list);
