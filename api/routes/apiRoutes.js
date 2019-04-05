@@ -3,7 +3,7 @@ module.exports = function(app) {
   var users = require('../controllers/userController');
   var pets = require('../controllers/petController');
 
-  var users = require('../controllers/userController');
+  var photos = require('../controllers/photoController');
   var training = require('../controllers/trainingController');
   //app.set('view engine', 'jade');
 
@@ -20,11 +20,9 @@ module.exports = function(app) {
 
   //TRAININGS//
   app.get('/api/trainings', training.list);
-
-
-  /*app.get('/api/trainings/new', function(req, res){
-  	res.render("newTrainingForm");
-  });*/  
   app.post('/api/trainings', training.newTraining);
+
+
+  app.post('/api/photo/user/:email', photos.uploadProfile);
 }
 
