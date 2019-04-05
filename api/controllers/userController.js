@@ -13,7 +13,7 @@ exports.getOne = function(req,res) {
     var email = req.params.email;
     if (!email) return res.status(430).send("Bad request, no email provided");
     
-    email = email.trim();
+    email = email.trim().toLowerCase();
     Users.getOne(email).then((user) => {
         if (user) res.json(user);
         else res.status(404).send("User doesn't exists");
@@ -30,7 +30,7 @@ exports.newUser = function(req,res) {
     if (!email) return res.status(400).send("Bad request, no email provided");
     if (!password) return res.status(400).send("Bad request, no password provided");
     alias = alias.trim();
-    email = email.trim();
+    email = email.trim().toLowerCase();
     password = password.trim();
     Users.createUser(alias, email, password).then(user => {
         return res.json(user);
@@ -45,7 +45,8 @@ exports.editUser = function(req,res){
     if(!email) return res.status(432).send("Bad request, no email provided");
     if (alias){
         alias = alias.trim(); 
-        Users.editAlias(email, alias).then(user=>{
+        email = email.trim().toLowerCase();
+        Users.editAlias(email.toLowerCase(), alias).then(user=>{
             return res.json(user);
         }).catch(err=>{
             return res.status(400).send(err);
@@ -56,7 +57,7 @@ exports.editUser = function(req,res){
 exports.deleteOne = function(req,res) {
     var email = req.params.email;
     if (!email) return res.status(432).send("Bad request, no email provided");
-    email = email.trim();
+    email = email.trim().toLowerCase();
     Users.deleteOne(email).then(result=>{
         return res.json(result);
     }).catch(err=>{

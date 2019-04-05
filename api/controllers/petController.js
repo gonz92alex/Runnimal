@@ -15,7 +15,7 @@
     
     
     exports.list = function(req,res) {
-        Pets.find().exec((err,pets) => {
+        Pets.find().populate({ path: 'owner', select: 'email' }).exec((err,pets) => {
             if (err)
                 res.send(err);
             else
