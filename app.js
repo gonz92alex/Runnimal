@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var multer  = require('multer');
 var env_vars = require('./bin/config-env').config();
 var dburl = env_vars["DBURL"];
 var dbschema = env_vars["DBSCHEMA"];
@@ -33,7 +34,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use('/', indexRoutes);
 //apiRoutes(app);
 

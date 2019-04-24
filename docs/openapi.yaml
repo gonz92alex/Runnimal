@@ -1,0 +1,267 @@
+openapi: 3.0.0
+info:
+  title: Runnimal
+  description: 'Runnimal tu app de fitnes animal'
+  contact: {}
+  version: '1.0'
+servers:
+- url: http://nidorana.fib.upc.edu/api
+  variables: {}
+- url: http://nidoqueen.fib.upc.edu/api
+  variables: {}
+- url: http://localhost:3000/api
+  variables: {}
+paths:
+  /users:
+    get:
+      tags:
+      - Users
+      summary: GET Users
+      description: ''
+      operationId: GetUsers
+      parameters:
+      responses:
+        200:
+          description: 'Te devuelve la lista de usuarios'
+          headers: {}
+    post:
+      tags:
+      - Users
+      summary: POST User
+      description: ''
+      operationId: PostUser
+      parameters:
+      - in: header
+        name: alias
+        description: 'Alias del usuario'
+        required: true
+        schema:
+          type: string
+          example: Brock
+      - in: header
+        name: email
+        description: 'Email del usuario'
+        required: true
+        schema:
+          type: string
+          example: brock@pokemon.com
+      - in: header
+        name: password
+        description: 'Password del usuario'
+        required: true
+        schema:
+          type: string
+          example: onix
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            example: '{"alias":"Misty","email":"misty@pokemon.com","password":"psyduck"}'
+        required: true
+      responses:
+        200:
+          description: 'Se ha ejecutado correctamente'
+          headers: {}
+        400:
+          description: 'Error en la creacion.'
+          headers: {}
+  /user/{email}:
+    get:
+      tags:
+      - Users
+      summary: GET user
+      description: 'Consulta el usuario'
+      operationId: GetUser
+      parameters:
+      - in: path
+        name: email
+        description: 'Email del usuario'
+        required: true
+        schema:
+          type: string
+          example: misty@pokemon.com
+      responses:
+        200:
+          description: 'Te devuelve el objeto'
+          headers: {}
+      deprecated: false
+    delete:
+      tags:
+      - Users
+      summary: DELETE users
+      description: 'Elimina el usuario'
+      operationId: DeleteUsers
+      parameters:
+      - in: path
+        name: email
+        description: 'email del usuario'
+        required: true
+        schema:
+          type: string
+          example: misty@pokemon.com
+      responses:
+        200:
+          description: 'El usuario se ha eliminado'
+          headers: {}
+  /pet/{owner}/{name}:
+    delete:
+      tags:
+      - Pets
+      summary: DELETE pet
+      description: ''
+      operationId: DeletePet
+      parameters:
+        - in: path
+          name: owner
+          schema:
+            type: string
+          required: true
+          description: El email del dueño del perro.
+        - in: path
+          name: name
+          schema:
+            type: string
+          required: true
+          description: El nombre de la mascota.
+      responses:
+        200:
+          description: ''
+          headers: {}
+      deprecated: false
+    get:
+      tags:
+      - Pets
+      summary: GET pet
+      description: ''
+      operationId: GetPet
+      parameters:
+        - in: path
+          name: owner
+          schema:
+            type: string
+          required: true
+          description: El email del dueño del perro.
+        - in: path
+          name: name
+          schema:
+            type: string
+          required: true
+          description: El nombre de la mascota.
+      responses:
+        200:
+          description: ''
+          headers: {}
+      deprecated: false
+  /pets:
+    get:
+      tags:
+      - Pets
+      summary: GET Pets
+      description: ''
+      operationId: GetPets
+      parameters:
+      - name: Content-Type
+        in: header
+        description: ''
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: application/json
+      responses:
+        200:
+          description: ''
+          headers: {}
+      deprecated: false
+    post:
+      tags:
+      - Pets
+      summary: POST Pet
+      description: ''
+      operationId: PostPet
+      parameters:
+      - name: Content-Type
+        in: header
+        description: ''
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: application/json
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pet'
+            example: '{"name":"Pikachu","weight":3,"race":"Electrico","birth":1996,"description":"No le gusta la pokeball","size":5,"owner":"ash@pokemon.com"}'
+        required: true
+      responses:
+        200:
+          description: ''
+          headers: {}
+      deprecated: false
+components:
+  schemas:
+    User:
+      title: POSTUserRequest
+      required:
+      - alias
+      - email
+      - password
+      type: object
+      properties:
+        alias:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        alias: Misty
+        email: misty@pokemon.com
+        password: psyduck
+    Pet:
+      title: POSTPetRequest
+      required:
+      - name
+      - weight
+      - race
+      - birth
+      - description
+      - size
+      - owner
+      type: object
+      properties:
+        name:
+          type: string
+        weight:
+          type: integer
+          format: int32
+        race:
+          type: string
+        birth:
+          type: integer
+          format: int32
+        description:
+          type: string
+        size:
+          type: integer
+          format: int32
+        owner:
+          type: string
+      example:
+        name: Pikachu
+        weight: 3
+        race: Electrico
+        birth: 1996
+        description: No le gusta la pokeball
+        size: Small
+        owner: ash@pokemon.com
+tags:
+- name: Users
+  description: ''
+- name: Pets
+  description: ''

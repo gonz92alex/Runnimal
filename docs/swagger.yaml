@@ -1,0 +1,287 @@
+openapi: 3.0.0
+info:
+  title: Runnimal
+  description: 'TODO: Add Description'
+  contact: {}
+  version: '1.0'
+servers:
+- url: http://localhost:3000/api
+  variables: {}
+paths:
+  /users:
+    post:
+      tags:
+      - Users
+      summary: POST User
+      description: ''
+      operationId: PostUser
+      parameters:
+      - name: Content-Type
+        in: header
+        description: ''
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: application/json
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POSTUserRequest'
+            example: '{"alias":"Misty","email":"misty@pokemon.com","password":"psyduck"}'
+        required: true
+      responses:
+        200:
+          description: ''
+          headers: {}
+      deprecated: false
+    get:
+      tags:
+      - Users
+      summary: GET Users
+      description: ''
+      operationId: GetUsers
+      parameters:
+      - name: Content-Type
+        in: header
+        description: ''
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: application/json
+      responses:
+        200:
+          description: ''
+          headers: {}
+      deprecated: false
+  /user/misty@pokemon.co:
+    get:
+      tags:
+      - Users
+      summary: GET user
+      description: ''
+      operationId: GetUser
+      parameters:
+      - name: Content-Type
+        in: header
+        description: ''
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: application/json
+      responses:
+        200:
+          description: ''
+          headers: {}
+      deprecated: false
+  /user/misty@pokemon.com:
+    delete:
+      tags:
+      - Users
+      summary: DELETE users
+      description: ''
+      operationId: DeleteUsers
+      parameters:
+      - name: Content-Type
+        in: header
+        description: ''
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: application/json
+      responses:
+        200:
+          description: ''
+          headers: {}
+      deprecated: false
+  /pet/ash@pokemon.com/Pikachu:
+    delete:
+      tags:
+      - Pets
+      summary: DELETE pet
+      description: ''
+      operationId: DeletePet
+      parameters:
+      - name: Content-Type
+        in: header
+        description: ''
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: application/json
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DELETEpetRequest'
+            example: '{"alias":"pepe","email":"pepe@marron.com","password":"NaNaNa"}'
+        required: true
+      responses:
+        200:
+          description: ''
+          headers: {}
+      deprecated: false
+    get:
+      tags:
+      - Pets
+      summary: GET pet
+      description: ''
+      operationId: GetPet
+      parameters:
+      - name: Content-Type
+        in: header
+        description: ''
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: application/json
+      responses:
+        200:
+          description: ''
+          headers: {}
+      deprecated: false
+  /pets:
+    get:
+      tags:
+      - Pets
+      summary: GET Pets
+      description: ''
+      operationId: GetPets
+      parameters:
+      - name: Content-Type
+        in: header
+        description: ''
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: application/json
+      responses:
+        200:
+          description: ''
+          headers: {}
+      deprecated: false
+    post:
+      tags:
+      - Pets
+      summary: POST Pet
+      description: ''
+      operationId: PostPet
+      parameters:
+      - name: Content-Type
+        in: header
+        description: ''
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: application/json
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POSTPetRequest'
+            example: '{"name":"Pikachu","weight":3,"race":"Electrico","birth":1996,"description":"No le gusta la pokeball","size":5,"owner":"ash@pokemon.com"}'
+        required: true
+      responses:
+        200:
+          description: ''
+          headers: {}
+      deprecated: false
+components:
+  schemas:
+    POSTUserRequest:
+      title: POSTUserRequest
+      required:
+      - alias
+      - email
+      - password
+      type: object
+      properties:
+        alias:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        alias: Misty
+        email: misty@pokemon.com
+        password: psyduck
+    DELETEpetRequest:
+      title: DELETEpetRequest
+      required:
+      - alias
+      - email
+      - password
+      type: object
+      properties:
+        alias:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        alias: pepe
+        email: pepe@marron.com
+        password: NaNaNa
+    POSTPetRequest:
+      title: POSTPetRequest
+      required:
+      - name
+      - weight
+      - race
+      - birth
+      - description
+      - size
+      - owner
+      type: object
+      properties:
+        name:
+          type: string
+        weight:
+          type: integer
+          format: int32
+        race:
+          type: string
+        birth:
+          type: integer
+          format: int32
+        description:
+          type: string
+        size:
+          type: integer
+          format: int32
+        owner:
+          type: string
+      example:
+        name: Pikachu
+        weight: 3
+        race: Electrico
+        birth: 1996
+        description: No le gusta la pokeball
+        size: 5
+        owner: ash@pokemon.com
+tags:
+- name: Users
+  description: ''
+- name: Pets
+  description: ''
