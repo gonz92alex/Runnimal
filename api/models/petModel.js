@@ -1,4 +1,4 @@
-var pets = require('../models/mongo/Pets');
+var pets = require('../db/Pets');
 
 
 exports.exists = function(email){

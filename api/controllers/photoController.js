@@ -1,7 +1,7 @@
 'use strict';
 
 var multer  = require('multer')
-var upload = multer({ dest: 'photo/' })
+var upload = multer({ dest: 'photos/' })
 
 var Users = require('../models/userModel');
 var Pets = require('../models/petModel');
@@ -14,8 +14,6 @@ exports.uploadUser = function(req,res) {
     var email = req.params.email;
     if (!email) return res.status(432).send("Bad request, no email provided");
     email = email.trim();
-    console.log(req.body);
-    console.log(req.file);
     let user = Users.exists(email).then(function(user){
         return Users.promiseToUser(user);
     })

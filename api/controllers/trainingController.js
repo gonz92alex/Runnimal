@@ -1,5 +1,5 @@
 'use strict';
-var Training = require('../models/mongo/Training');
+var Training = require('../db/Training');
 
 
 exports.list = function(req,res) {

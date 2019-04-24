@@ -1,4 +1,4 @@
-var Users = require('../models/mongo/Users');
+var Users = require('../db/Users');
 
 
 

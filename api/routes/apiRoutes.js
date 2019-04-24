@@ -3,11 +3,14 @@ module.exports = function(app) {
   var users = require('../controllers/userController');
   var pets = require('../controllers/petController');
 
-  var photo = require('../controllers/photoController');
+ 
   var training = require('../controllers/trainingController');
+  var upload = require('../models/photoModel').photos();
 
-  var multer  = require('multer');
-  var upload = multer({ dest: 'photos/' });
+  var photoRoutes = require('photoRoutes');
+
+  console.log(upload)
+
   //app.set('view engine', 'jade');
 
   app.get('/api/users',users.list);
@@ -27,10 +30,6 @@ module.exports = function(app) {
   app.post('/api/trainings', training.newTraining);
 
 
-  // Photos
-  app.post('/api/photo/user/:email', upload.single('profile'), photo.uploadUser);
-  app.post('/api/photo/pet/:owner/:name', upload.single('profile'), photo.uploadPet);
-  app.get('/api/photo/user/:email', photo.getUser);
-  app.get('/api/photo/pet/:owner/:name', photo.getPet);
+ app.use('/api/photos', photoRoutes)
 }
 
